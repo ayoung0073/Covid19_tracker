@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 tracker</title>
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+</head>
+<body id="page-top">
+
+<div id="wrapper">
+
+    <div class="jumbotron">
+        <h6>COVID19 한국 현황</h6>
+        <h1 class="display-4" th:text="${korea[0].totalNum}"></h1>
+        <p>총 확진자 수</p>
+        <hr class="my-4">
+        <p>
+            <span>전일대비 증감량</span>
+            <span class="font-weight-bold" th:text="${korea[0].diffFromBeforeDay}">0</span>
+        </p>
+    </div>
+
+    <table class="table table-bordered" id="dataTable">
+        <tr align="center" class="bg-gray-200">
+            <th>지역</th>
+            <th>확진환자수(전일대비 증감량)</th>
+            <th>사망자</th>
+            <th title = "인구 10만 명당">발생률(*)</th>
+        </tr>
+        <tr align="center" th:each = "stat : ${korea} ">
+            <td th:text = "${stat.country}"> </td>
+            <td th:text = "|${stat.totalNum}(${stat.diffFromBeforeDay})|">0</td>
+            <td th:text = "${stat.deathNum}">0</td>
+            <td th:text = "${stat.incidence}">0</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
